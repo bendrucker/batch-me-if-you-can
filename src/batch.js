@@ -5,7 +5,7 @@ var boom      = require('boom');
 var internals = {};
 
 exports.handler = function (batch, reply) {
-  if (!batch.payload.requests) {
+  if (!Array.isArray(batch.payload.requests)) {
     return reply(boom.badRequest('Missing requests array'));
   }
   Promise.map(batch.payload.requests, function (request) {

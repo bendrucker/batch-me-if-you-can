@@ -70,8 +70,15 @@ describe('Batch Endpoint', function () {
     });
   };
 
-  it('rejects requests with no requests array', function () {
+  it('rejects requests with no requests', function () {
     return request().then(function (response) {
+      expect(response.statusCode).to.equal(400);
+      expect(response.result.message).to.equal('Missing requests array');
+    });
+  });
+
+  it('rejects requests with a non-array on requests', function () {
+    return request({}).then(function (response) {
       expect(response.statusCode).to.equal(400);
       expect(response.result.message).to.equal('Missing requests array');
     });
