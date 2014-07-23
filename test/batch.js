@@ -156,4 +156,38 @@ describe('Batch Endpoint', function () {
     });
   });
 
+  it('can pipeline many post requests', function () {
+    return request([
+      {
+        method: 'post',
+        path: '/users',
+        payload: {
+          name: 'BD'
+        }
+      },
+      {
+        method: 'post',
+        path: '/messages',
+        payload: {
+          message: 'hi',
+          user_id: '$$0.id'
+        },
+        references: ['payload']
+      }
+    ])
+    .then(function (response) {
+      expect(response.result).to.deep.equal([
+        {
+          id: 1,
+          name: 'BD'
+        },
+        {
+          id: 1,
+          message: 'hi',
+          user_id: 1
+        }
+      ]);
+    });
+  });
+
 });
