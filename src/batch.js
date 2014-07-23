@@ -12,7 +12,15 @@ exports.handler = function (batch, reply) {
   if (internals.containsReferences(batch)) {
     responses = Promise
       .reduce(batch.payload.requests, function (requests, request) {
-        requests.push(request);
+        requests.push({
+          path: internals.referencesIn(request, 'path')
+            ? internals.path(request.path)
+            : request.path,
+          method: request.method,
+          payload: internals.referencesIn(request, 'payload')
+            ? internals.payload(request.payload)
+            : request.payload
+        });
         return requests;
       }, [])
       .reduce(function (responses, request) {
@@ -35,6 +43,18 @@ internals.containsReferences = function (batch) {
   return batch.payload.requests.some(function (request) {
     return request.references && request.references.length;
   });
+};
+
+internals.referencesIn = function (request, object) {
+  return request.references && request.references.indexOf(object) !== -1;
+};
+
+internals.payload = function (payload) {
+  return payload;
+};
+
+internals.path = function (path) {
+  return path;
 };
 
 internals.inject = function (request, batch) {
