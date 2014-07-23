@@ -1,0 +1,41 @@
+{
+  "name": "batch-me-if-you-can",
+  "version": "0.0.0",
+  "description": "Advanced batch requests for Hapi with path, query, and payload pipelining",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bendrucker/batch-me-if-you-can.git"
+  },
+  "keywords": [
+    "hapi",
+    "spumko",
+    "plugin",
+    "batch",
+    "pipeline"
+  ],
+  "author": "Ben Drucker <bvdrucker@gmail.com> (http://www.bendrucker.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bendrucker/batch-me-if-you-can/issues"
+  },
+  "homepage": "https://github.com/bendrucker/batch-me-if-you-can",
+  "dependencies": {
+    "bluebird": "~2.2.2",
+    "boom": "~2.4.2",
+    "getobject": "~0.1.0",
+    "hapi": "~6.2.0"
+  },
+  "peerDependencies": {
+    "inject-then": "~0.2.0"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "hapi": "~6.2.0",
+    "inject-then": "~0.2.0",
+    "mocha": "~1.20.1"
+  }
+}
