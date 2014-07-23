@@ -11,7 +11,7 @@ exports.handler = function (batch, reply) {
   Promise.map(batch.payload.requests, function (request) {
     return batch.server.injectThen({
       url: request.path,
-      mnethod: request.method,
+      method: request.method,
       headers: batch.headers,
       payload: request.payload,
       session: batch.session
