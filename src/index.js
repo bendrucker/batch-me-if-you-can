@@ -6,6 +6,7 @@ exports.register = function (plugin, options, next) {
     path: '/batch',
     handler: require('./batch').handler
   });
+  plugin.dependency('inject-then');
   next();
 };
 
