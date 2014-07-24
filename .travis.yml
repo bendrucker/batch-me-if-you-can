@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '0.11'
+- '0.10'
+deploy:
+  provider: npm
+  email: bvdrucker@gmail.com
+  api_key:
+    secure: Nk4yUjlP4bQyUPYaxV2xJYEi69YM0/ZZQ8f07/W4w3WatmSQygXWiigkBGb/s16zm4F5bcCN1GOhQudvdqnfrPaiGta4MBQuSOvYp32xNl376D/olHk5+KWC5eraTPyLK+txrQEAiIqBlPcgrVko70UXpQWAcZtn7bz9tfIsfHY=
+  on:
+    tags: true
+    all_branches: true
+    repo: bendrucker/batch-me-if-you-can
