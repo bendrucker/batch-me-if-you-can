@@ -1,8 +1,10 @@
 'use strict';
 
-var Promise   = require('bluebird');
-var boom      = require('boom');
-var internals = {};
+var Promise    = require('bluebird');
+var boom       = require('boom');
+var traverse   = require('traverse');
+var reference  = require('./reference');
+var internals  = {};
 
 exports.handler = function (batch, reply) {
   if (!Array.isArray(batch.payload.requests)) {
@@ -11,23 +13,19 @@ exports.handler = function (batch, reply) {
   var responses;
   if (internals.containsReferences(batch)) {
     responses = Promise
-      .reduce(batch.payload.requests, function (requests, request) {
-        requests.push({
+      .reduce(batch.payload.requests, function (responses, request) {
+        return internals.inject({
           path: internals.referencesIn(request, 'path')
             ? internals.path(request.path)
             : request.path,
           method: request.method,
           payload: internals.referencesIn(request, 'payload')
-            ? internals.payload(request.payload)
+            ? internals.payload(request.payload, responses)
             : request.payload
-        });
-        return requests;
-      }, [])
-      .reduce(function (responses, request) {
-        return internals.inject(request, batch)
-          .bind(responses)
-          .then(responses.push)
-          .return(responses);
+        }, batch)
+        .bind(responses)
+        .then(responses.push)
+        .return(responses);
       }, []);
   }
   else {
@@ -49,8 +47,13 @@ internals.referencesIn = function (request, object) {
   return request.references && request.references.indexOf(object) !== -1;
 };
 
-internals.payload = function (payload) {
-  return payload;
+internals.payload = function (payload, requests) {
+  return traverse(payload).map(function (value) {
+    if (this.isLeaf && reference.isReference(value)) {
+      var ref = reference.parse(value);
+      this.update(reference.get(requests[ref.index], ref.property));
+    }
+  });
 };
 
 internals.path = function (path) {

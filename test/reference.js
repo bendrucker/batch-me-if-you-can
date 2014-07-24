@@ -1,9 +1,9 @@
 'use strict';
 
 var expect     = require('chai').expect;
-var references = require('../src/references');
+var references = require('../src/reference');
 
-describe('References', function () {
+describe('Reference', function () {
 
   describe('#parse', function () {
 

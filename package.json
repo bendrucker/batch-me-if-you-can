@@ -27,7 +27,8 @@
     "bluebird": "~2.2.2",
     "boom": "~2.4.2",
     "getobject": "~0.1.0",
-    "hapi": "~6.2.0"
+    "hapi": "~6.2.0",
+    "traverse": "~0.6.6"
   },
   "peerDependencies": {
     "inject-then": "~0.2.0"
