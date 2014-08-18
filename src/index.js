@@ -1,10 +1,17 @@
 'use strict';
 
+var batch = require('./batch');
+
 exports.register = function (plugin, options, next) {
   plugin.route({
     method: 'post',
     path: '/batch',
-    handler: require('./batch').handler
+    handler: batch.handler,
+    config: {
+      validate: {
+        payload: batch.validate
+      }
+    }
   });
   plugin.dependency('inject-then');
   next();
