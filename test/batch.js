@@ -72,14 +72,26 @@ describe('Batch Endpoint', function () {
     });
   };
 
-  it('rejects requests with no requests', function () {
+  it('rejects requests with no requests array', function () {
     return request().then(function (response) {
+      expect(response.statusCode).to.equal(400);
+    });
+  });
+
+  it('rejects requests with empty requests array', function () {
+    return request([]).then(function (response) {
       expect(response.statusCode).to.equal(400);
     });
   });
 
   it('rejects requests with a non-array on requests', function () {
     return request({}).then(function (response) {
+      expect(response.statusCode).to.equal(400);
+    });
+  });
+
+  it('rejects requests missing a path', function () {
+    return request([{}]).then(function (response) {
       expect(response.statusCode).to.equal(400);
     });
   });

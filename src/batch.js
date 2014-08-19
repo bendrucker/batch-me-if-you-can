@@ -34,7 +34,7 @@ internals.requestSchema = Joi.object().keys({
 
 exports.validate = Joi.object().keys({
   parallel: Joi.boolean().default(true),
-  requests: Joi.array().required().includes(internals.requestSchema)
+  requests: Joi.array().required().min(1).includes(internals.requestSchema)
 });
 
 internals.inject = function (request, batch) {
