@@ -174,6 +174,15 @@ describe('batch-me-if-you-can', function () {
       });
   });
 
+  it('can apply a parallel override from the batch', function () {
+    register();
+    return batch([{path: '/delay/10'}, {path: '/delay/0'}], {parallel: false})
+      .then(function (response) {
+        expect(response.result[0]).to.be.below(response.result[1]);
+      });
+  });
+
+
   // var server;
   // beforeEach(function () {
   //   server = new hapi.Server();

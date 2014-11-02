@@ -1,14 +1,16 @@
 'use strict';
 
 var Promise = require('bluebird');
+var hoek    = require('hoek');
 var joi     = require('joi');
 
 exports.handler = function (batch, reply) {
 
-  var config = batch.route.plugins['batch-me-if-you-can'];
+  var config = hoek.applyToDefaults(batch.route.plugins['batch-me-if-you-can'], {
+    parallel: batch.payload.parallel
+  });
   var responses;
-  
-  if (config.parallel || batch.payload.parallel) {
+  if (config.parallel) {
     responses = Promise.map(batch.payload.requests, function (request) {
       return inject(request, batch);
     });
