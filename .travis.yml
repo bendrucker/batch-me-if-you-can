@@ -15,3 +15,6 @@ deploy:
 after_success:
 - npm i -g codeclimate-test-reporter
 - codeclimate < ./coverage/lcov.info
+env:
+  global:
+    secure: I0lXYNjl5xZLty1pBW9B58ZWKIXQjuvMnBpVbUNVCCCrkrqR+KMKKfMvYokWlfCtHGO96aC6jj/ZYWA6Vdf7k3yacXS+msULlY2S8rkrel45xacqed/PSlH+QGbZPnelA/uFEziijGlZkbyYy1ak5wQOoGUQa3spB7YLi9wzGBQ=
