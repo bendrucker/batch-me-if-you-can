@@ -51,8 +51,7 @@ describe('batch-me-if-you-can', function () {
 
   function batch (requests, options) {
     options = hoek.applyToDefaults({
-      path: '/batch',
-      parallel: true
+      path: '/batch'
     }, options || {});
     return server.injectThen({
       method: 'post',

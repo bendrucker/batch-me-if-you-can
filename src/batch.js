@@ -8,7 +8,7 @@ exports.handler = function (batch, reply) {
   var config = batch.route.plugins['batch-me-if-you-can'];
   var responses;
   
-  if (config.parallel && batch.payload.parallel) {
+  if (config.parallel || batch.payload.parallel) {
     responses = Promise.map(batch.payload.requests, function (request) {
       return inject(request, batch);
     });
@@ -27,7 +27,7 @@ exports.handler = function (batch, reply) {
 };
 
 exports.validate = joi.object().keys({
-  parallel: joi.boolean().default(true),
+  parallel: joi.boolean(),
   requests: joi.array().required().min(1).includes(joi.object().keys({
     path: joi.string().required(),
     payload: joi.any(),
