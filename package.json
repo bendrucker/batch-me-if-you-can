@@ -5,7 +5,7 @@
   "main": "./src",
   "scripts": {
     "lint": "jshint **/*.js",
-    "test": "mocha test"
+    "test": "istanbul cover node_modules/.bin/_mocha -- ./test"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "chai": "1",
     "hapi": "7",
     "inject-then": "1",
+    "istanbul": "~0.3.2",
     "jshint": "^2.5.8",
     "mocha": "1",
     "sinon": "1",
