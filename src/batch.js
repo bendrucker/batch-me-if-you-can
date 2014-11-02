@@ -17,9 +17,9 @@ exports.handler = function (batch, reply) {
     responses = Promise
       .reduce(batch.payload.requests, function (responses, request) {
         return inject(request, batch)
-        .bind(responses)
-        .then(responses.push)
-        .return(responses);
+          .bind(responses)
+          .then(responses.push)
+          .return(responses);
       }, []);
   }
   
