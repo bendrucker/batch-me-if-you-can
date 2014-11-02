@@ -4,6 +4,7 @@
   "description": "Advanced batch requests for Hapi with path, query, and payload pipelining",
   "main": "index.js",
   "scripts": {
+    "lint": "jshint **/*.js",
     "test": "mocha test"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "chai": "1",
     "hapi": "7",
     "inject-then": "1",
+    "jshint": "^2.5.8",
     "mocha": "1",
     "sinon": "1",
     "sinon-chai": "2"
