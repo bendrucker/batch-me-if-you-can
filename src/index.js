@@ -7,7 +7,7 @@ exports.register = function (plugin, options, next) {
   var config = hoek.applyToDefaults({
     path: '/batch',
     parallel: true
-  }, options || {});
+  }, options);
   plugin.route({
     method: 'post',
     path: config.path,
