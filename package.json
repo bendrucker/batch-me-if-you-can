@@ -24,19 +24,19 @@
   },
   "homepage": "https://github.com/bendrucker/batch-me-if-you-can",
   "dependencies": {
-    "bluebird": "~2.2.2",
-    "joi": "~4.6.2"
+    "bluebird": "^2.3.10",
+    "joi": "^4.7.0"
   },
   "peerDependencies": {
-    "inject-then": "~0.3.0",
-    "hapi": "6"
+    "inject-then": "^1.0.1",
+    "hapi": "6 || 7"
   },
   "devDependencies": {
-    "chai": "~1.9.1",
-    "hapi": "6",
-    "inject-then": "~0.3.0",
-    "mocha": "~1.20.1",
-    "sinon": "~1.10.3",
-    "sinon-chai": "~2.5.0"
+    "chai": "1",
+    "hapi": "7",
+    "inject-then": "1",
+    "mocha": "1",
+    "sinon": "1",
+    "sinon-chai": "2"
   }
 }
