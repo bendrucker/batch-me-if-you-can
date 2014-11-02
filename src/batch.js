@@ -5,9 +5,10 @@ var joi     = require('joi');
 
 exports.handler = function (batch, reply) {
 
+  var config = batch.route.plugins['batch-me-if-you-can'];
   var responses;
   
-  if (batch.payload.parallel) {
+  if (config.parallel && batch.payload.parallel) {
     responses = Promise.map(batch.payload.requests, function (request) {
       return inject(request, batch);
     });

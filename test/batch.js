@@ -165,7 +165,15 @@ describe('batch-me-if-you-can', function () {
       });
   });
 
-
+  it('can set batches to run in sequence default', function () {
+    register({
+      parallel: false
+    });
+    return batch([{path: '/delay/10'}, {path: '/delay/0'}])
+      .then(function (response) {
+        expect(response.result[0]).to.be.below(response.result[1]);
+      });
+  });
 
   // var server;
   // beforeEach(function () {

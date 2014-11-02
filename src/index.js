@@ -15,6 +15,9 @@ exports.register = function (plugin, options, next) {
     config: {
       validate: {
         payload: batch.validate
+      },
+      plugins: {
+        'batch-me-if-you-can': config
       }
     }
   });
