@@ -165,7 +165,7 @@ describe('batch-me-if-you-can', function () {
       });
   });
 
-  it('can set batches to run in sequence default', function () {
+  it('can set batches to run in sequence by default', function () {
     register({
       parallel: false
     });
