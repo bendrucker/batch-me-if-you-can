@@ -25,6 +25,7 @@
   "homepage": "https://github.com/bendrucker/batch-me-if-you-can",
   "dependencies": {
     "bluebird": "^2.3.10",
+    "hoek": "^2.8.1",
     "joi": "^4.7.0"
   },
   "peerDependencies": {

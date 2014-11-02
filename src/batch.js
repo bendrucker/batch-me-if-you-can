@@ -42,7 +42,7 @@ internals.inject = function (request, batch) {
     url: request.path,
     method: request.method,
     headers: batch.headers,
-    payload: request.payload,
+    payload: JSON.stringify(request.payload),
     session: batch.session
   })
   .get('result');
