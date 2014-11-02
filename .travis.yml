@@ -12,3 +12,6 @@ deploy:
     tags: true
     all_branches: true
     repo: bendrucker/batch-me-if-you-can
+after_success:
+- npm i -g codeclimate-test-reporter
+- codeclimate < ./coverage/lcov.info
