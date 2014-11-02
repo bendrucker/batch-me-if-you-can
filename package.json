@@ -33,6 +33,7 @@
     "hapi": "6 || 7"
   },
   "devDependencies": {
+    "boom": "^2.6.0",
     "chai": "1",
     "hapi": "7",
     "inject-then": "1",

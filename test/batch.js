@@ -1,12 +1,15 @@
 'use strict';
 
-var hapi   = require('hapi');
-var joi    = require('joi');
-var expect = require('chai').use(require('sinon-chai')).expect;
-var sinon  = require('sinon');
-var hoek   = require('hoek');
+var Promise = require('bluebird');
+var hapi    = require('hapi');
+var joi     = require('joi');
+var expect  = require('chai').expect;
+var hoek    = require('hoek');
+var boom    = require('boom');
 
 describe('batch-me-if-you-can', function () {
+
+  Promise.longStackTraces();
 
   var server;
   beforeEach(function () {
@@ -36,7 +39,7 @@ describe('batch-me-if-you-can', function () {
         handler: function (request, reply) {
           setTimeout(function () {
             reply(Date.now());
-          }, request.params.delay)
+          }, request.params.delay);
         },
         config: {
           validate: {
@@ -44,6 +47,13 @@ describe('batch-me-if-you-can', function () {
               delay: joi.number()
             }
           }
+        }
+      },
+      {
+        method: 'get',
+        path: '/error',
+        handler: function (request, reply) {
+          reply(boom.notFound());
         }
       }
     ]);
@@ -179,6 +189,18 @@ describe('batch-me-if-you-can', function () {
     return batch([{path: '/delay/10'}, {path: '/delay/0'}], {parallel: false})
       .then(function (response) {
         expect(response.result[0]).to.be.below(response.result[1]);
+      });
+  });
+
+  it('includes error responses directly', function () {
+    register();
+    return batch([{path: '/error'}])
+      .then(function (response) {
+        expect(response.statusCode).to.equal(200);
+        expect(response.result[0]).to.deep.equal({
+          statusCode: 404,
+          error: 'Not Found'
+        });
       });
   });
 
