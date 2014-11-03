@@ -1,5 +1,8 @@
 language: node_js
 node_js: '0.10'
+script:
+- npm run lint
+- npm test
 deploy:
   provider: npm
   email: bvdrucker@gmail.com
@@ -9,3 +12,9 @@ deploy:
     tags: true
     all_branches: true
     repo: bendrucker/batch-me-if-you-can
+after_success:
+- npm i -g codeclimate-test-reporter
+- codeclimate < ./coverage/lcov.info
+env:
+  global:
+    secure: I0lXYNjl5xZLty1pBW9B58ZWKIXQjuvMnBpVbUNVCCCrkrqR+KMKKfMvYokWlfCtHGO96aC6jj/ZYWA6Vdf7k3yacXS+msULlY2S8rkrel45xacqed/PSlH+QGbZPnelA/uFEziijGlZkbyYy1ak5wQOoGUQa3spB7YLi9wzGBQ=

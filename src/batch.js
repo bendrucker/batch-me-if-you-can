@@ -1,49 +1,49 @@
 'use strict';
 
-var Promise   = require('bluebird');
-var Joi       = require('joi');
-var internals = {};
+var Promise = require('bluebird');
+var hoek    = require('hoek');
+var joi     = require('joi');
 
 exports.handler = function (batch, reply) {
 
+  var config = hoek.applyToDefaults(batch.route.plugins['batch-me-if-you-can'], {
+    parallel: batch.payload.parallel
+  });
   var responses;
-  
-  if (batch.payload.parallel) {
+  if (config.parallel) {
     responses = Promise.map(batch.payload.requests, function (request) {
-      return internals.inject(request, batch);
+      return inject(request, batch);
     });
   }
   else {
     responses = Promise
       .reduce(batch.payload.requests, function (responses, request) {
-        return internals.inject(request, batch)
-        .bind(responses)
-        .then(responses.push)
-        .return(responses);
+        return inject(request, batch)
+          .bind(responses)
+          .then(responses.push)
+          .return(responses);
       }, []);
   }
   
   responses.done(reply);
 };
 
-internals.requestSchema = Joi.object().keys({
-  path: Joi.string().required(),
-  payload: Joi.any(),
-  method: Joi.string().default('get')
+exports.validate = joi.object().keys({
+  parallel: joi.boolean(),
+  requests: joi.array().required().min(1).includes(joi.object().keys({
+    path: joi.string().required(),
+    payload: joi.any(),
+    method: joi.string().default('get')
+  }))
 });
 
-exports.validate = Joi.object().keys({
-  parallel: Joi.boolean().default(true),
-  requests: Joi.array().required().min(1).includes(internals.requestSchema)
-});
-
-internals.inject = function (request, batch) {
+function inject (request, batch) {
   return batch.server.injectThen({
     url: request.path,
     method: request.method,
     headers: batch.headers,
-    payload: request.payload,
+    payload: JSON.stringify(request.payload),
     session: batch.session
   })
   .get('result');
-};
+}
