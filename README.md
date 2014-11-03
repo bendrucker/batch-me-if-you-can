@@ -1,4 +1,4 @@
-batch-me-if-you-can
+# batch-me-if-you-can
 [![Build Status](https://travis-ci.org/bendrucker/batch-me-if-you-can.svg?branch=master)](https://travis-ci.org/bendrucker/batch-me-if-you-can) [![NPM version](https://badge.fury.io/js/batch-me-if-you-can.svg)](http://badge.fury.io/js/batch-me-if-you-can) [![Code Climate](https://codeclimate.com/github/bendrucker/batch-me-if-you-can/badges/gpa.svg)](https://codeclimate.com/github/bendrucker/batch-me-if-you-can) [![Test Coverage](https://codeclimate.com/github/bendrucker/batch-me-if-you-can/badges/coverage.svg)](https://codeclimate.com/github/bendrucker/batch-me-if-you-can)
 ===================
 
