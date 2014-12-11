@@ -11,11 +11,11 @@ $ npm install batch-me-if-you-can inject-then
 ```
 
 ```js
-server.pack.register(require('inject-then'), function (err) {
+server.register(require('inject-then'), function (err) {
   if (err) throw err;
 });
-server.pack.register({
-  plugin: require('batch-me-if-you-can'),
+server.register({
+  register: require('batch-me-if-you-can'),
   options: {}
 }, function (err) {
   if (err) throw err;

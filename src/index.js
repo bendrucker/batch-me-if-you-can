@@ -3,12 +3,12 @@
 var batch = require('./batch');
 var hoek  = require('hoek');
 
-exports.register = function (plugin, options, next) {
+exports.register = function (server, options, next) {
   var config = hoek.applyToDefaults({
     path: '/batch',
     parallel: true
   }, options);
-  plugin.route({
+  server.route({
     method: 'post',
     path: config.path,
     handler: batch.handler,
@@ -21,7 +21,7 @@ exports.register = function (plugin, options, next) {
       }
     }
   });
-  plugin.dependency('inject-then');
+  server.dependency('inject-then');
   next();
 };
 

@@ -5,8 +5,7 @@ var hoek    = require('hoek');
 var joi     = require('joi');
 
 exports.handler = function (batch, reply) {
-
-  var config = hoek.applyToDefaults(batch.route.plugins['batch-me-if-you-can'], {
+  var config = hoek.applyToDefaults(batch.route.settings.plugins['batch-me-if-you-can'], {
     parallel: batch.payload.parallel
   });
   var responses;

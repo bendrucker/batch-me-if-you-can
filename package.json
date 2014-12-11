@@ -1,7 +1,7 @@
 {
   "name": "batch-me-if-you-can",
   "version": "1.0.1",
-  "description": "Advanced batch requests for Hapi with path, query, and payload pipelining",
+  "description": "Batch requests for Hapi",
   "main": "./src",
   "scripts": {
     "lint": "jshint **/*.js",
@@ -30,14 +30,14 @@
     "joi": "^4.7.0"
   },
   "peerDependencies": {
-    "inject-then": "^1.0.1",
-    "hapi": "6 || 7"
+    "inject-then": "2",
+    "hapi": "8"
   },
   "devDependencies": {
     "boom": "^2.6.0",
     "chai": "1",
-    "hapi": "7",
-    "inject-then": "1",
+    "hapi": "8",
+    "inject-then": "2",
     "istanbul": "~0.3.2",
     "jshint": "^2.5.8",
     "mocha": "1",

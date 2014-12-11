@@ -14,6 +14,7 @@ describe('batch-me-if-you-can', function () {
   var server;
   beforeEach(function () {
     server = new hapi.Server();
+    server.connection();
   });
 
   function throwIf (err) {
@@ -22,11 +23,11 @@ describe('batch-me-if-you-can', function () {
 
   function register (options) {
     options = options || {};
-    server.pack.register({
-      plugin: require('../'),
+    server.register({
+      register: require('../'),
       options: options
     }, throwIf);
-    server.pack.register(require('inject-then'), throwIf);
+    server.register(require('inject-then'), throwIf);
     server.route([
       {
         method: 'post',
